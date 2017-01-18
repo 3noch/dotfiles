@@ -1,0 +1,21 @@
+# nix-home is currently broken
+
+{ pkgs ? import <nixpkgs> {}
+, ...
+}:
+let
+  nixHome    = pkgs.callPackage ../nix-home.nix {};
+  nixHomeLib = pkgs.callPackage "${nixHome}/nix/lib/nixhome/default.nix" {};
+
+  dotFile = name: {
+    ".${name}" = "{./${name}}";
+  };
+
+in nixHomeLib.mkHome {
+  user = "elliot";
+  files =
+       dotFile "bash_profile"
+    // dotFile "gitconfig"
+    // dotFile "gitconfig-global"
+  ;
+}

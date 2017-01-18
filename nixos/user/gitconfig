@@ -1,0 +1,14 @@
+[user]
+	email = eacameron@gmail.com
+	name = 3noch
+	signingkey = B754636C
+
+[commit]
+	gpgsign = true
+
+[core]
+	excludesfile = ~/.gitignore-global
+	editor = vim
+
+[push]
+	default = simple
