@@ -38,5 +38,22 @@ in {
     # custom packages
     # nix-home  # currently broken
   ];
+
+  services = {
+    openssh.enable = true;  # OpenSSH daemon
+
+    emacs = {
+      # use per-user emacs service
+      enable  = false;
+      install = true;
+    };
+  };
+
+  virtualisation = {
+    virtualbox.host = {
+      enable   = true;
+      headless = true;
+    };
+  };
 }
 
