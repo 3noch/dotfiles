@@ -43,9 +43,8 @@ in {
     openssh.enable = true;  # OpenSSH daemon
 
     emacs = {
-      # use per-user emacs service
       enable  = false;
-      install = true;
+      install = false;
     };
   };
 
