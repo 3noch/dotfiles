@@ -4,11 +4,13 @@ let
   emacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
 in
 emacsWithPackages (epkgs: (with epkgs.melpaStablePackages; [
-  magit          # ; Integrate git <C-x g>
-  zerodark-theme # ; Nicolas' theme
 ]) ++ (with epkgs.melpaPackages; [
   helm
+  intero
+  magit          # ; Integrate git <C-x g>
   undo-tree      # ; <C-x u> to show the undo tree
+  nix-mode
+  zerodark-theme # ; Nicolas' theme
   #zoom-frm       # ; increase/decrease font size for all buffers C-x C-+>
 ]) ++ (with epkgs.elpaPackages; [
   beacon         # ; highlight my cursor when scrolling
