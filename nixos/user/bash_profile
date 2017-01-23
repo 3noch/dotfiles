@@ -1,1 +1,18 @@
 export PATH=$PATH:$HOME/bin
+
+emacs --daemon 2>/dev/null
+
+function restart-emacs() {
+  emacsclient -e "(kill-emacs)"
+  emacs --daemon
+}
+
+function rebuild-user() {
+  source ~/.bash_profile
+  build-user
+}
+
+function build-user() {
+  nix-env -f '<nixpkgs>' -iA emacs nix-prefetch-zip stack tmux
+  restart-emacs
+}
