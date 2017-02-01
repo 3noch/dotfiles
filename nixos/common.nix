@@ -5,7 +5,7 @@ let
 
 in {
   # Set nixpkgs.config to something like this:
-  # let common = pkgs.callPackage ./<path-to-common.nix> {}; in  
+  # let common = pkgs.callPackage ./<path-to-common.nix> {}; in
   # nixpkgs.config = {
   #   allowUnfree = true;
   #   packageOverrides = pkgs_: {
@@ -54,5 +54,8 @@ in {
       headless = true;
     };
   };
-}
 
+  security.pam = {
+    enableSSHAgentAuth = true;
+  };
+}

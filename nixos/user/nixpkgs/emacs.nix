@@ -5,6 +5,7 @@ let
 in
 emacsWithPackages (epkgs: (with epkgs.melpaStablePackages; [
 ]) ++ (with epkgs.melpaPackages; [
+  flycheck
   helm
   intero
   magit          # ; Integrate git <C-x g>

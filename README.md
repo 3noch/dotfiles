@@ -37,6 +37,8 @@ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_<remote> -C "<host>:<remote>"
 Configure `~/.ssh/config` to specify which identity file to use for each remote:
 
 ```
+AddKeysToAgent yes
+
 Host <remote>
     IdentitiesOnly yes
     IdentityFile ~/.ssh/id_ed25519_<remote>
