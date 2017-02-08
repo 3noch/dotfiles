@@ -21,9 +21,54 @@
  ;; If there is more than one, they won't work right.
  )
 
+
+; == Language ==
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
+
+
+; == Theme ==
 (load-theme 'zerodark t)
 
-(add-hook 'haskell-mode-hook 'intero-mode)
+
+; == Modes ==
+
+(helm-mode 1)
+(global-linum-mode t)
+
+; Abbrev
+(define-abbrev-table 'global-abbrev-table '(
+    ("alpha" "")
+    ("inf"   ""))
+  )
+(abbrev-mode 1)
+
+; Haskell
+;(add-hook 'haskell-mode-hook 'intero-mode)
+
+(require 'haskell-interactive-mode)
+(require 'haskell-process)
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(custom-set-variables
+  '(haskell-process-suggest-remove-import-lines t)
+  '(haskell-process-auto-import-loaded-modules t)
+  '(haskell-process-type 'stack-ghci)
+  '(haskell-process-args-stack-ghci '())
+  '(haskell-process-log t))
+
+(define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
+(define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
+(define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
+(define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
+(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
+(define-key haskell-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
+(define-key haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
+
+(define-key haskell-cabal-mode-map (kbd "C-`") 'haskell-interactive-bring)
+(define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
+(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
+(define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)
+
 
 ; == Preferences ==
 (setq-default indent-tabs-mode nil)     ; Always use spaces for indentation.
@@ -45,3 +90,12 @@
       (delete-blank-lines))))
 
 (add-hook 'before-save-hook 'delete-trailing-blank-lines)
+
+; Configure backup files (http://stackoverflow.com/a/2680682/503377)
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+  backup-by-copying t    ; Don't delink hardlinks
+  version-control t      ; Use version numbers on backups
+  delete-old-versions t  ; Automatically delete excess backups
+  kept-new-versions 20   ; how many of the newest versions to keep
+  kept-old-versions 5    ; and how many of the old
+)

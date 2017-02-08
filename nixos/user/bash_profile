@@ -13,6 +13,14 @@ function rebuild-user() {
 }
 
 function build-user() {
-  nix-env -f '<nixpkgs>' -iA emacs nix-prefetch-zip shellcheck stack tmux
+  nix-env -f '<nixpkgs>' -iA \
+    cabal-install \
+    emacs \
+    ghc \
+    nix-prefetch-git \
+    nix-prefetch-zip \
+    shellcheck \
+    stack \
+    tmux
   restart-emacs
 }

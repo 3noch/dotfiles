@@ -39,12 +39,25 @@ in {
     # nix-home  # currently broken
   ];
 
-  services = {
-    openssh.enable = true;  # OpenSSH daemon
+  nix = {
+    extraOptions = "auto-optimise-store = true";
+  };
 
+  security.pam = {
+    enableSSHAgentAuth = true;
+  };
+
+  services = {
     emacs = {
       enable  = false;
       install = false;
+    };
+
+    openssh.enable = true;  # OpenSSH daemon
+
+    tor = {
+      enable = true;
+      client.enable = true;
     };
   };
 
@@ -55,7 +68,4 @@ in {
     };
   };
 
-  security.pam = {
-    enableSSHAgentAuth = true;
-  };
 }
