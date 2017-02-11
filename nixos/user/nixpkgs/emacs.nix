@@ -1,12 +1,13 @@
 { pkgs, ... }:
 let
-  emacsWithPackages = (pkgs.emacsPackagesNgGen pkgs.emacs).emacsWithPackages;
+  emacsWithPackages = (pkgs.emacsPackagesNgGen pkgs.emacs25).emacsWithPackages;
 in
 emacsWithPackages (epkgs: (with epkgs.melpaStablePackages; [
 ]) ++ (with epkgs.melpaPackages; [
   flycheck
   haskell-mode
   helm
+  helm-swoop
   intero
   magit            # ; Integrate git <C-x g>
   multiple-cursors # ; http://pragmaticemacs.com/emacs/multiple-cursors/

@@ -1,5 +1,7 @@
 export PATH=$PATH:$HOME/bin
 
+export NIX_PATH=nixpkgs=/nix/var/nix/profiles/per-user/$(whoami)/channels/nixpkgs:$NIX_PATH
+
 emacs --daemon 2>/dev/null
 
 function restart-emacs() {
@@ -17,6 +19,7 @@ function build-user() {
     cabal-install \
     emacs \
     ghc \
+    lastpass-cli \
     nix-prefetch-git \
     nix-prefetch-zip \
     shellcheck \
